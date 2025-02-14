@@ -1,11 +1,4 @@
-#include<iostream>
-#include<string>
-#include<ctime>
-#include<cstdlib>
-#include<iomanip>
-
-using namespace std;
-
+#include"lab19.h"
 class Unit{
 		string name;
 		string type;		
@@ -63,12 +56,54 @@ void Unit::newTurn(){
 	guard_on = false;
 }
 
+bool Unit::isDead(){
+    return hp <= 0;
+}
 
+void Unit::guard() {
+    guard_on = true;
+}
 
-/////////////////////////////////////////////////////////////////////////////////////
-//Write function members isDead(), guard(), heal(), beAttacked(), and attack() here//
-/////////////////////////////////////////////////////////////////////////////////////
+int Unit::beAttacked(int atk) {
+    int damage = 0;
+    
+    if (guard_on) { 
+        
+        damage = (atk - def) / 3;
+        if (damage < 0) damage = 0;  
+        
+    } else {
+        
+        damage = atk - def;
+        if (damage < 0) damage = 0;
+        
+    }
+   
+    hp -= damage;
+    
+    return damage;
 
+}
+
+int Unit::attack(Unit&target){
+	return target.beAttacked(atk);
+}
+
+int Unit::heal() {
+    int heal = rand() % 21+10;
+    
+    if (hp + heal > hpmax) { 
+        
+        heal = hpmax - hp;
+        hp = hpmax;
+        
+    } else {
+        
+        hp += heal;
+    }
+    
+    return heal;
+}
 
 
 void drawScene(char p_action,int p,char m_action,int m){

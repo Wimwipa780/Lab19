@@ -1,4 +1,11 @@
-// Please include header (lab21.h) here.
+#ifndef LAB19_H
+#define LAB19_H
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
 
 int main(){
 	srand(time(0));
@@ -42,7 +49,7 @@ int main(){
 			drawScene(player_action,p,monster_action,m);
 			playerWin();
 			break; 
-		}
+		}h
 		
 		turn_count++;
 	}
